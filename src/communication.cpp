@@ -286,12 +286,27 @@ void treatResponseFromHub(JsonArray& arr){
 #ifdef DEBUG_PRINT
 					Serial.println(F("Ephemeral key updated"));
 #endif
-				} else if  (tag[9] == GET_RECIPIENT_KEY[1]){
+				} else if (tag[9] == GET_RECIPIENT_KEY[1]){
 					checkAndUpdateRecipientKey(arr[1]);
 #ifdef DEBUG_PRINT
 					Serial.println(F("recipient pub key received"));
 #endif
-				}else{
+				} else if (tag[9] == GET_ADDRESS_DEFINITION[1]){
+					handleDefinition(arr[1]);
+#ifdef DEBUG_PRINT
+					Serial.println(F("definition received"));
+#endif
+				} else if (tag[9] == GET_INPUTS_FOR_AMOUNT[1]){
+					handleInputsForAmount(arr[1]);
+#ifdef DEBUG_PRINT
+					Serial.println(F("inputs received"));
+#endif
+				}else if (tag[9] == GET_PARENTS_BALL_WITNESSES[1]){
+					handleUnitProps(arr[1]);
+#ifdef DEBUG_PRINT
+					Serial.println(F("units props received"));
+#endif
+				}  else {
 #ifdef DEBUG_PRINT
 					Serial.println(F("wrong tag id for response"));
 #endif

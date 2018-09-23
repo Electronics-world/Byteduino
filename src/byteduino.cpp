@@ -75,9 +75,9 @@ void byteduino_init (){
 	//watchdog timer
 	watchdogTimer = timerBegin(0, 80, true);                  
 	timerAttachInterrupt(watchdogTimer, &restartDevice, true);  
+	FEED_WATCHDOG;
 	timerAlarmWrite(watchdogTimer, 3000 * 1000, false); 
 	timerAlarmEnable(watchdogTimer);
-	FEED_WATCHDOG;
 #endif
 
 
@@ -90,6 +90,9 @@ void byteduino_init (){
 	//determine device address
 	getDeviceAddress(byteduino_device.keys.publicKeyM1b64, byteduino_device.deviceAddress);
 	
+	//determine funding address
+	getPaymentAddressFromPubKey(byteduino_device.keys.publicKeyM1b64, byteduino_device.fundingAddress);
+
 	//send device infos to serial
 	printDeviceInfos();
 	
@@ -138,6 +141,9 @@ void printDeviceInfos(){
 	Serial.println("#0000");
 	Serial.println("Extended Pub Key:");
 	Serial.println(byteduino_device.keys.extPubKey);
+	Serial.println("Funding address:");
+	Serial.println(byteduino_device.fundingAddress);
+	
 }
 
 
@@ -208,6 +214,9 @@ void byteduino_loop(){
 			if (byteduino_device.isConnected)
 				sendHeartbeat();
 				job2Seconds = 0;
+				requestDefinition("CYPIJ2YETA6R6PWDY5XTXO2CABLZ4KVJ");
+getParentsAndLastBallAndWitnesses();
+			//	requestInputsForAmount(350000, "T3CC7QAZ72ZHUTL5DKWDHV4SVO5EENS4", nullptr);
 		}
 
 

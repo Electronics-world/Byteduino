@@ -2,6 +2,9 @@
 #define HEARTBEAT "-1"
 #define UPDATE_MESSENGER_KEY "-2"
 #define GET_RECIPIENT_KEY "-3"
+#define GET_ADDRESS_DEFINITION "-4"
+#define GET_INPUTS_FOR_AMOUNT "-5"
+#define GET_PARENTS_BALL_WITNESSES "-6"
 
 //string sizes
 #define TAG_LENGTH 10
@@ -9,6 +12,7 @@
 #define MAX_HUB_STRING_SIZE 30
 #define MAX_DEVICE_NAME_STRING_SIZE 25
 #define MAX_PAIRING_SECRET_STRING_SIZE 25
+#define MAX_DATA_SIZE 100
 
 //objects
 #define MAX_KEYS_COUNT 8

@@ -21,6 +21,7 @@ typedef struct Byteduino{
 	int  messengerKeyRotationTimer = 10;
 	char deviceName[MAX_DEVICE_NAME_STRING_SIZE];
 	char deviceAddress[34];
+	char fundingAddress[33];
 
 } Byteduino;
 
@@ -80,6 +81,22 @@ typedef struct waitingConfirmationRoom{
 	char sigb64[89];
 	char JsonDigest[500];
 } waitingConfirmationRoom;
+
+typedef struct bufferPayment{
+	int timeOut = 0;
+	int amount = 0;
+	char asset[45];
+	char address[33];
+	char data[MAX_DATA_SIZE];
+	bool arePropsReceived = false;
+	bool isDefinitionReceived = false;
+	bool requireDefinition = false;
+	char parent_units [2][45];
+	char last_ball[45];
+	char last_ball_unit[45];
+	char witness_list_unit[45];
+} bufferPayment;
+
 
 typedef void (*cbMessageReceived)(const char* senderPubKey, const char* senderHub, const char* messageReceived);
 typedef void (*cbSignatureToConfirm)(const char * signedTxt, const char* JsonDigest);
